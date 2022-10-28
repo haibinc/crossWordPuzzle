@@ -249,3 +249,24 @@ void diagonalWord(char front[50][50], std::string word, int row, int col)
         diagonalWord(front, word, row, col);
     }
 }
+
+void fillPuzzle(char front[50][50], char back[50][50], int row, int col)
+{
+    char a = 'a';
+
+    for (int i = 0; i < row; ++i)
+    {
+        for (int j = 0; j < col; ++j)
+        {
+            if(front[i][j] == ' ')
+            {
+                char temp = a + rand()%26;
+                back[i][j] = temp;
+            }
+            else
+            {
+                back[i][j] = front[i][j];
+            }
+        }
+    }
+}

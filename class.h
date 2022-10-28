@@ -16,5 +16,6 @@ void addWord(char front[50][50], std::string word[], int wordCount, int row, int
 void verticalWord(char front[50][50], std::string word, int row, int col);
 void horizontalWord(char front[50][50], std::string word, int row, int col);
 void diagonalWord(char front[50][50], std::string word, int row, int col);
+void fillPuzzle(char front[50][50], char back[50][50], int row, int col);
 
 #endif //CROSSWORDPUZZLE_CLASS_H

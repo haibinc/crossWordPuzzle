@@ -16,7 +16,10 @@ int main() {
         calcRowColSize(word, wordCount, row, col);
     }
     generateBoard(front, row, col);
+    generateBoard(back, row, col);
     addWord(front, word, wordCount, row, col);
+    fillPuzzle(front, back, row, col);
     printBoard(front, row, col);
+    printBoard(back, row, col);
     return 0;
 }
