@@ -43,7 +43,7 @@ void printBoard(char front[50][50], int row, int col)
 void addWord(char front[50][50], std::string word[], int wordCount, int row, int col)
 {
     for (int i = 0; i < wordCount; ++i) {
-        int randomChoice = rand() % 2;
+        int randomChoice = rand() % 3;
         if(randomChoice == 0)
         {
             verticalWord(front, word[i], row, col);
@@ -52,10 +52,10 @@ void addWord(char front[50][50], std::string word[], int wordCount, int row, int
         {
             horizontalWord(front, word[i], row, col);
         }
-//        else if(randomChoice == 2)
-//        {
-//            diagonalWord(front, word[i], row, col);
-//        }
+        else if(randomChoice == 2)
+        {
+            diagonalWord(front, word[i], row, col);
+        }
     }
 }
 
@@ -186,44 +186,66 @@ void verticalWord(char front[50][50], std::string word, int row, int col)
     }
 }
 
-//void diagonalWord(char front[50][50], std::string word, int row, int col)
-//{
-//    int randomRow = rand() % row;
-//    int randomCol = rand() % col;
-//    bool isGood = false;
-//    for (int i = 0; i < word.length(); ++i)
-//    {
-//        if(randomRow + word.length() <= row && front[randomRow + i][randomCol] == ' ')
-//        {
-//            isGood = true;
-//        }
-//        else if(randomRow - word.length() >= 0 && front[randomRow - i][randomCol] == ' ')
-//        {
-//            isGood = true;
-//        }
-//        else
-//        {
-//            isGood = false;
-//            break;
-//        }
-//    }
-//
-//    if(isGood == true)
-//    {
-//        for (int i = 0; i < word.length(); ++i)
-//        {
-//            if(randomRow + word.length() < row && front[randomRow + i][randomCol] == ' ')
-//            {
-//                front[randomRow + i][randomCol] = word[i];
-//            }
-//            else if(randomRow - word.length() > 0 && front[randomRow - i][randomCol] == ' ')
-//            {
-//                front[randomRow - i][randomCol] = word[i];
-//            }
-//        }
-//    }
-//    else
-//    {
-//        diagonalWord(front, word, row, col);
-//    }
-//}
+void diagonalWord(char front[50][50], std::string word, int row, int col)
+{
+    int randomRow = rand() % row;
+    int randomCol = rand() % col;
+    bool isGood = false;
+    for (int i = 0; i < word.length(); ++i) {
+        if (randomRow + word.length() <= row && randomCol + word.length() <= col) {
+            if (front[randomRow + i][randomCol + i] == ' ')
+            {
+                isGood = true;
+                continue;
+            }
+            else
+            {
+                isGood = false;
+                break;
+            }
+        }
+
+
+        if (randomRow - word.length() >= 0 && randomCol - word.length() >= 0)
+        {
+            if (front[randomRow - i][randomCol - i] == ' ')
+            {
+                isGood = true;
+                continue;
+            }
+            else
+            {
+                isGood = false;
+                break;
+            }
+        }
+    }
+
+    if(isGood == true)
+    {
+        for (int i = 0; i < word.length(); ++i)
+        {
+            if (randomRow + word.length() <= row && randomCol + word.length() <= col) {
+                if (front[randomRow + i][randomCol + i] == ' ')
+                {
+                   front[randomRow + i][randomCol + i] = word[i];
+                    continue;
+                }
+            }
+
+
+            if (randomRow - word.length() >= 0 && randomCol - word.length() >= 0)
+            {
+                if (front[randomRow - i][randomCol - i] == ' ')
+                {
+                    front[randomRow - i][randomCol - i] = word[i];
+                    continue;
+                }
+            }
+        }
+    }
+    else
+    {
+        diagonalWord(front, word, row, col);
+    }
+}
