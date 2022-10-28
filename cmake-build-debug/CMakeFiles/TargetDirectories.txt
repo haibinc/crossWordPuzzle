@@ -1,0 +1,3 @@
+/Users/haibin/CLionProjects/crossWordPuzzle/cmake-build-debug/CMakeFiles/crossWordPuzzle.dir
+/Users/haibin/CLionProjects/crossWordPuzzle/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/haibin/CLionProjects/crossWordPuzzle/cmake-build-debug/CMakeFiles/rebuild_cache.dir

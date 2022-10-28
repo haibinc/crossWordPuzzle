@@ -1,0 +1,10 @@
+# ninja log v5
+3	592	1666950850961571937	CMakeFiles/crossWordPuzzle.dir/class.cpp.o	90f60750d6ef9684
+592	657	1666950851029738790	crossWordPuzzle	30bacf5e3f8f77b0
+4	584	1666950265226108746	CMakeFiles/crossWordPuzzle.dir/main.cpp.o	829335476b18fb35
+3	621	1666951183215061771	CMakeFiles/crossWordPuzzle.dir/class.cpp.o	90f60750d6ef9684
+621	679	1666951183274742969	crossWordPuzzle	30bacf5e3f8f77b0
+4	943	1666952630771669483	CMakeFiles/crossWordPuzzle.dir/class.cpp.o	90f60750d6ef9684
+943	1031	1666952630863825463	crossWordPuzzle	30bacf5e3f8f77b0
+3	627	1666952658401529790	CMakeFiles/crossWordPuzzle.dir/class.cpp.o	90f60750d6ef9684
+627	689	1666952658466502957	crossWordPuzzle	30bacf5e3f8f77b0
