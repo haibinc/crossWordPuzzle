@@ -4,6 +4,52 @@
 
 #include "class.h"
 
+void menu()
+{
+    int choice;
+    std::cout << "Welcome to Crossworld Puzzle Land \n" << "Choose an option: \n"
+    << "(1) New Puzzle\n" << "(2) Load Previous Puzzle\n" << "(3) Solution for puzzle\n";
+    std::cin >> choice;
+    switch(choice)
+    {
+        case 1: {
+            std::ofstream fout;
+            std::string fileName;
+            char front[50][50];
+            char back[50][50];
+            int row = 0, col = 0, wordCount = 0;
+            std::string word[50];
+            std::cout << "Enter a new file's name" << std::endl;
+            std::cin >> fileName;
+            createFile(fout, fileName);
+            std::cout << "How many words do you want: " << std::endl;
+            std::cin >> wordCount;
+            std::cout << "Input " << wordCount << " words: " << std::endl;
+            for (int i = 0; i < wordCount; ++i) {
+                std::cin >> word[i];
+                calcRowColSize(word, wordCount, row, col);
+            }
+            generateBoard(front, row, col);
+            generateBoard(back, row, col);
+            addWord(front, word, wordCount, row, col);
+            fillPuzzle(front, back, row, col);
+            saveFile(front, back, fout, fileName, row, col);
+            break;
+        }
+        case 2:
+        {
+            char front[50][50];
+            std::ofstream fout;
+            std::string fileName;
+            std::cout << "What was the puzzle's name?" << std::endl;
+            std::cin >> fileName;
+            readFile(fileName, front);
+            break;
+        }
+        case 3:
+            break;
+    }
+}
 void generateBoard(char front[50][50], int& row, int& col)
 {
 
@@ -269,4 +315,82 @@ void fillPuzzle(char front[50][50], char back[50][50], int row, int col)
             }
         }
     }
+}
+
+void createFile(std::ofstream &fout, std::string& fileName)
+{
+    fout.open(fileName);
+
+    if(fout.fail())
+    {
+        std::cout << "Could not open file";
+        exit(1);
+    }
+    fout.close();
+}
+
+void saveFile(char front[50][50], char back[50][50], std::ofstream &fout, std::string fileName, int row, int col)
+{
+    fout.open(fileName);
+
+    for (int i = 0; i < row; ++i)
+    {
+        for (int j = 0; j < col; ++j)
+        {
+            fout.width(3);
+            fout << front[i][j];
+        }
+        fout << std::endl;
+    }
+
+    fout << '.' << std::endl;
+
+    for (int i = 0; i < row; ++i)
+    {
+        for (int j = 0; j < col; ++j)
+        {
+            fout.width(3);
+            fout << back[i][j];
+        }
+        fout << std::endl;
+    }
+    fout.close();
+}
+
+void readFile(std::string fileName, char front[50][50])
+{
+    std::ifstream fin;
+    char c;
+    int row = 0, col = 0;
+    fin.open(fileName);
+    if(fin.fail())
+    {
+        std::cout << "No such file" << std::endl;
+        exit(1);
+    }
+
+    while(fin >> c)
+    {
+        col++;
+        if(fin.get() == '\n')
+        {
+            row++;
+        }
+        else if(fin.get()  == '.')
+        {
+            break;
+        }
+    }
+    std::cout << col << std::endl << row << std::endl;
+    col = col/row;
+    while(fin >> c)
+        for (int i = 0; i < row; ++i)
+        {
+            for (int j = 0; j < col; ++j)
+            {
+                fin >> front[i][j];
+            }
+        }
+
+//    printBoard(front, row, col);
 }
