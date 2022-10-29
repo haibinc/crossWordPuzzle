@@ -21,6 +21,7 @@ void diagonalWord(char front[50][50], std::string word, int row, int col);
 void fillPuzzle(char front[50][50], char back[50][50], int row, int col);
 void createFile(std::ofstream &fout, std::string& fileName);
 void saveFile(char front[50][50], char back[50][50], std::ofstream &fout, std::string fileName, int row, int col);
-void readFile(std::string fileName, char front[50][50]);
+void readFile(std::string fileName);
+void solveFile(std::string fileName);
 
 #endif //CROSSWORDPUZZLE_CLASS_H

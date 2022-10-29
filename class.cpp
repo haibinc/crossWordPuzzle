@@ -38,16 +38,20 @@ void menu()
         }
         case 2:
         {
-            char front[50][50];
-            std::ofstream fout;
             std::string fileName;
             std::cout << "What was the puzzle's name?" << std::endl;
             std::cin >> fileName;
-            readFile(fileName, front);
+            readFile(fileName);
             break;
         }
         case 3:
+        {
+            std::string fileName;
+            std::cout << "What was the puzzle's name?" << std::endl;
+            std::cin >> fileName;
+            solveFile(fileName);
             break;
+        }
     }
 }
 void generateBoard(char front[50][50], int& row, int& col)
@@ -71,18 +75,6 @@ void calcRowColSize(std::string word[], int wordCount, int& row, int& col)
             row = word[i].length()*2;
             col = word[i].length()*2;
         }
-    }
-
-}
-void printBoard(char front[50][50], int row, int col)
-{
-    for (int i = 0; i < row; ++i)
-    {
-        for (int j = 0; j < col; ++j)
-        {
-            std::cout << front[i][j] << " ";
-        }
-        std::cout << std::endl;
     }
 }
 
@@ -357,40 +349,56 @@ void saveFile(char front[50][50], char back[50][50], std::ofstream &fout, std::s
     fout.close();
 }
 
-void readFile(std::string fileName, char front[50][50])
+void readFile(std::string fileName) {
+    std::ifstream fin;
+    char c;
+    int row = 0, col = 0;
+    fin.open(fileName);
+    if (fin.fail()) {
+        std::cout << "No such file" << std::endl;
+        exit(1);
+    }
+
+    while (fin.get(c)) {
+        if (c == '\n') {
+            col++;
+            row++;
+        }
+        else if (c == '.')
+        {
+            break;
+        }
+    }
+
+    while (fin.get(c))
+    {
+        std::cout << c;
+    }
+    fin.close();
+}
+
+void solveFile(std::string fileName)
 {
     std::ifstream fin;
     char c;
     int row = 0, col = 0;
     fin.open(fileName);
-    if(fin.fail())
-    {
+    if (fin.fail()) {
         std::cout << "No such file" << std::endl;
         exit(1);
     }
 
-    while(fin >> c)
+    while (fin.get(c))
     {
-        col++;
-        if(fin.get() == '\n')
+        std::cout << c;
+        if (c == '\n')
         {
+            col++;
             row++;
         }
-        else if(fin.get()  == '.')
+        else if (c == '.')
         {
             break;
         }
     }
-    std::cout << col << std::endl << row << std::endl;
-    col = col/row;
-    while(fin >> c)
-        for (int i = 0; i < row; ++i)
-        {
-            for (int j = 0; j < col; ++j)
-            {
-                fin >> front[i][j];
-            }
-        }
-
-//    printBoard(front, row, col);
 }
